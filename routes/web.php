@@ -16,13 +16,17 @@ use App\Http\Controllers\Session\SessionController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/', [SessionController::class, 'index']);
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'authenticate']);
 
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'create']);
 
-Route::get('/logout', [LoginController::class, 'logout']);
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::get('/session', [SessionController::class, 'index']);
+Route::middleware([\App\Http\Middleware\Authenticate::class])->group(function () {
+    Route::get('/session', [SessionController::class, 'index'])->name('session');
+    Route::get('/session/create', [SessionController::class, 'create'])->name('session_create');
+    Route::post('/session/create', [SessionController::class, 'store']);
+});

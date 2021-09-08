@@ -1,12 +1,12 @@
 @extends('template')
 @section('content')
-<div class="row">
-  <div class="container">
+<div class="container">
+  <div class="row">
     <div class="col-sm-12">
       <h1>S'inscrire</h1>
       <hr>
       <form method="POST">
-        {{ csrf_field() }}
+        {{csrf_field()}}
         <div class="form-group">
           <label>Adresse e-mail</label>
           <input type="email" name="email" class="form-control" placeholder="Saisir votre adresse e-mail">
