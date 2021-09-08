@@ -12,7 +12,6 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
     protected $table = 'formateur';
-    protected $updated_at = null;
     protected $created_at = null;
 
     /**

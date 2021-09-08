@@ -3,6 +3,8 @@
 <div class="container">
   <div class="row">
       <div class="col-sm-12">
+          <h1>Liste des sessions</h1>
+          <hr>
           @include('alert', ['type' => 'success'])
       </div>
       <div class="col-sm-6">

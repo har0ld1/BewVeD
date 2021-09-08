@@ -22,8 +22,8 @@ class SessionController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'libelle' => 'min:4,max:24,required',
-             'date' => 'required'
+            'libelle' => ['min:4','max:24','required'],
+             'date' => ['required']
         ]);
 
         $session = new Session;
