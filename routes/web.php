@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Session\SessionController;
 use App\Http\Controllers\Competence\CompetenceController;
+use App\Http\Controllers\Apprenant\ApprenantController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,14 @@ Route::middleware([\App\Http\Middleware\Authenticate::class])->group(function ()
     Route::get('/session', [SessionController::class, 'index'])->name('session');
     Route::get('/session/create', [SessionController::class, 'create'])->name('session_create');
     Route::post('/session/create', [SessionController::class, 'store']);
+
+    Route::get('/apprenant', [ApprenantController::class, 'index'])->name('apprenant');
+    Route::get('/apprenant/create', [ApprenantController::class, 'create'])->name('apprenant_create');
+    Route::post('/apprenant/create', [ApprenantController::class, 'store']);
+    Route::get('/apprenant/delete/{id}', [ApprenantController::class, 'delete'])->name('apprenant_delete');
+    Route::get('/apprenant/edit/{id}', [ApprenantController::class, 'show'])->name('apprenant_edit');
+    Route::post('/apprenant/edit/{id}', [ApprenantController::class, 'edit']);
+
     Route::get('/competence', [CompetenceController::class, 'index'])->name('competence');
     Route::get('/competence/create', [CompetenceController::class, 'create'])->name('competence_create');
     Route::post('/competence/create', [CompetenceController::class, 'store']);

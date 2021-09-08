@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Competence;
 
 use App\Http\Controllers\Controller;
-use App\Models\Competence;
 use Illuminate\Http\Request;
+use App\Models\Competence;
 
 class CompetenceController extends Controller
 {

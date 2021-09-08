@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Session extends Model
+class Apprenant extends Model
 {
     use HasFactory;
 
-    protected $table = 'session';
+    protected $table = 'apprenant';
     public $timestamps  = null;
     protected $created_at = null;
 
@@ -19,7 +19,10 @@ class Session extends Model
      * @var string[]
      */
     protected $fillable = [
-        'libelle',
-        'date',
+        'lastname',
+        'firstname',
+        'email',
+        'gender',
+        'age',
     ];
 }
