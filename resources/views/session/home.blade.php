@@ -26,7 +26,8 @@
                     <div class="card-body">
                         <h5 class="card-title">{{$item->libelle}}</h5>
                         <p class="card-text">Promotion du {{\Carbon\Carbon::parse($item->date)->format('d F Y')}}</p>
-                        <a href="#" class="btn btn-primary">Accéder</a>
+                        <a href="{{route('session_show', $item->id)}}" class="btn btn-primary">Accéder</a>
+                        <a href="{{route('session_remove', $item->id)}}" class="btn btn-danger">Supprimer</a>
                     </div>
                 </div>
             </div>

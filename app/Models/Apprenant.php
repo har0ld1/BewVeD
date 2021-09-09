@@ -10,7 +10,7 @@ class Apprenant extends Model
     use HasFactory;
 
     protected $table = 'apprenant';
-    public $timestamps  = null;
+    public $timestamps = null;
     protected $created_at = null;
 
     /**
@@ -19,10 +19,16 @@ class Apprenant extends Model
      * @var string[]
      */
     protected $fillable = [
+        'id',
         'lastname',
         'firstname',
         'email',
         'gender',
         'age',
     ];
+
+    public function sessions()
+    {
+        return $this->belongsTo(SessionApprenant::class, 'id', 'idApprenant');
+    }
 }

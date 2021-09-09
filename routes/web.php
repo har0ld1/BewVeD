@@ -30,6 +30,11 @@ Route::middleware([\App\Http\Middleware\Authenticate::class])->group(function ()
     Route::get('/session', [SessionController::class, 'index'])->name('session');
     Route::get('/session/create', [SessionController::class, 'create'])->name('session_create');
     Route::post('/session/create', [SessionController::class, 'store']);
+    Route::get('/session/show/{id}', [SessionController::class, 'show'])->name('session_show');;
+    Route::get('/session/remove/{id}', [SessionController::class, 'remove'])->name('session_remove');;
+    Route::get('/session/apprenant/{id}', [SessionController::class, 'apprenant'])->name('apprenant_add');
+    Route::get('/session/apprenant/add/{idSession}/{idApprenant}', [SessionController::class, 'add_apprenant'])->name('apprenant_add_submit');;
+    Route::get('/session/apprenant/delete/{idSession}/{idApprenant}', [SessionController::class, 'remove_apprenant'])->name('apprenant_remove');
 
     Route::get('/apprenant', [ApprenantController::class, 'index'])->name('apprenant');
     Route::get('/apprenant/create', [ApprenantController::class, 'create'])->name('apprenant_create');
