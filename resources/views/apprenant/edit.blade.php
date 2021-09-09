@@ -61,6 +61,13 @@
                         <small class="form-text text-danger">{{ $errors->first('age') }}</small>
                     @endif
                 </div>
+                @foreach($competences as $competence)
+                    <div class="form-group">
+                        {{csrf_field()}}
+                        <label>{{$competence->libelle}}</label>
+                        <input type="checkbox" name="skill" value="{{$competence->libelle}}">
+                    </div>
+                @endforeach
                 <button type="submit" class="btn btn-warning">Editer</button>
             </form>
         </div>

@@ -29,6 +29,7 @@
                         <td>Email</td>
                         <td>Sexe</td>
                         <td>Age</td>
+                        <td>Compétences</td>
                         <td style="width: 20%">Action</td>
                     </tr>
                 </thead>
@@ -40,6 +41,11 @@
                             <td>{{$item->email}}</td>
                             <td>{{$item->gender}}</td>
                             <td>{{$item->age}}</td>
+                            <td>
+                                @foreach($item->competences as $competence)
+                                    {{$competence->libelle}}
+                                @endforeach
+                            </td>
                             <td>
                                 <a href="{{route('apprenant_edit', $item->id)}}" class="btn btn-primary">Éditer</a>
                                 <a href="{{route('apprenant_delete', $item->id)}}" class="btn btn-danger">Supprimer</a>

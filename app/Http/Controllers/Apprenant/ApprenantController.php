@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Apprenant;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Apprenant;
+use App\Models\Competence;
 
 class ApprenantController extends Controller
 {
@@ -15,7 +16,7 @@ class ApprenantController extends Controller
 
     public function create()
     {
-        return view('apprenant.create');
+        return view('apprenant.create')->with('competences', Competence::all());
     }
 
     public function store(Request $request)
@@ -27,13 +28,15 @@ class ApprenantController extends Controller
             'gender' => ['required'],
             'age' => ['required'],
         ]);
-
         $apprenant = new Apprenant;
         $apprenant->lastname = $request->lastname;
         $apprenant->firstname = $request->firstname;
         $apprenant->email = $request->email;
         $apprenant->gender = $request->gender;
         $apprenant->age = $request->age;
+        foreach($apprenant->competences as $competence) {
+            $competence = $request->skill;
+        }
         $apprenant->save();
 
         return redirect('/apprenant')->with('status', 'Apprenant enregistré avec succès');

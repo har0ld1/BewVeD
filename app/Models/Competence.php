@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Competence extends Model
 {
     use HasFactory;
-    protected $table = 'competences';
+    protected $table = 'competence';
     public $timestamps = null;
     protected $created_at = null;
 
@@ -20,4 +20,12 @@ class Competence extends Model
     protected $fillable = [
         'libelle'
     ];
+
+    /**
+     * Get all of the posts that are assigned this tag.
+     */
+    public function apprenants()
+    {
+        return $this->belongsToMany(Apprenant::class);
+    }
 }
