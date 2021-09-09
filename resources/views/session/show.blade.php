@@ -36,7 +36,7 @@
                                 {{$competence->libelle}}
                             @endforeach
                         </td>
-                        <td><a href="{{route("apprenant_delete", [$session->id, $item->id])}}" class="btn btn-danger">Supprimer</a> </td>
+                        <td><a href="{{route('apprenant_remove', [$session->id, $item->id])}}" class="btn btn-danger">Supprimer</a></td>
                     </tr>
                 @endforeach
                 </tbody>

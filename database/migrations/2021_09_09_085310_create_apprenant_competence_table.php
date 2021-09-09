@@ -14,8 +14,8 @@ class CreateApprenantCompetenceTable extends Migration
     public function up()
     {
         Schema::create("apprenant_competence", function(Blueprint $table) {
-            $table->foreignId("apprenant_id")->constrained('apprenant');
-            $table->foreignId('competence_id')->constrained('competence');
+            $table->foreignId("apprenant_id")->constrained('apprenant')->onDelete("cascade");
+            $table->foreignId('competence_id')->constrained('competence')->onDelete("cascade");
         });
     }
 

@@ -37,7 +37,7 @@
                 @endforeach
                 </tbody>
             </table>
-            <a  href="{{ url()->previous() }}" class="btn btn-warning">Retour</a>
+            <a href="{{route('session_show', [$session->id])}}" class="btn btn-warning">Retour</a>
         </div>
     </div>
 </div>
