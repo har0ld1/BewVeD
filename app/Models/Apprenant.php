@@ -31,4 +31,9 @@ class Apprenant extends Model
     {
         return $this->belongsTo(SessionApprenant::class, 'id', 'idApprenant');
     }
+
+    public function competences()
+    {
+        return $this->belongsToMany(Competence::class);
+    }
 }
