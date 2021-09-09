@@ -31,7 +31,7 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials))
             // Authentication passed...
-            return redirect()->intended('/session')->with('status', 'Vous êtes maintenant authentifié');
+            return redirect('/session')->with('status', 'Vous êtes maintenant authentifié');
 
         return back()->with('status', 'Identifants non valide');
     }
