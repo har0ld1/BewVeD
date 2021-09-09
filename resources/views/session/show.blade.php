@@ -31,7 +31,11 @@
                         <td>{{$item->email}}</td>
                         <td>{{$item->gender}}</td>
                         <td>{{$item->age}}</td>
-                        <td></td>
+                        <td>
+                            @foreach(\App\Models\Apprenant::find($item->id)->competences as $competence)
+                                {{$competence->libelle}}
+                            @endforeach
+                        </td>
                         <td><a href="{{route("apprenant_delete", [$session->id, $item->id])}}" class="btn btn-danger">Supprimer</a> </td>
                     </tr>
                 @endforeach

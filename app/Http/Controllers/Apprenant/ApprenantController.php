@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Apprenant;
 
 use App\Http\Controllers\Controller;
+use App\Models\ApprenantCompetence;
 use Illuminate\Http\Request;
 use App\Models\Apprenant;
 use App\Models\Competence;
@@ -34,10 +35,12 @@ class ApprenantController extends Controller
         $apprenant->email = $request->email;
         $apprenant->gender = $request->gender;
         $apprenant->age = $request->age;
-        foreach($apprenant->competences as $competence) {
-            $competence = $request->skill;
-        }
         $apprenant->save();
+
+        $apprenant_competence = new ApprenantCompetence;
+        $apprenant_competence->apprenant_id = $apprenant->id;
+        $apprenant_competence->competence_id = $request->skill;
+        $apprenant_competence->save();
 
         return redirect('/apprenant')->with('status', 'Apprenant enregistré avec succès');
     }
@@ -46,6 +49,7 @@ class ApprenantController extends Controller
     {
         return view('apprenant.edit', [
             'apprenant' => Apprenant::findOrFail($id),
+            'competences' => Competence::all(),
         ]);
     }
 
@@ -68,6 +72,7 @@ class ApprenantController extends Controller
                 'age' => ['required'],
             ]);
         }
+        $apprenant->competences = $request->skill;
         Apprenant::whereId($id)->update($validatedData);
         return redirect('/apprenant')
             ->with('status', 'Apprenant modifié avec succès');

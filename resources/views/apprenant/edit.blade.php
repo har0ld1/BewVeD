@@ -6,8 +6,8 @@
             <h1>Éditer un apprenant</h1>
             <hr>
             <form method="POST">
+                {{csrf_field()}}
                 <div class="form-group">
-                    {{csrf_field()}}
                     <label>Nom</label>
                     <input type="text" name="lastname" class="form-control" value="{{$apprenant->lastname}}"  placeholder="Saisir votre nom">
                     @if($errors->has('lastname'))
@@ -15,7 +15,6 @@
                     @endif
                 </div>
                 <div class="form-group">
-                    {{csrf_field()}}
                     <label>Prénom</label>
                     <input type="text" name="firstname" class="form-control" value="{{$apprenant->firstname}}" placeholder="Saisir votre prénom">
                     @if($errors->has('firstname'))
@@ -23,7 +22,6 @@
                     @endif
                 </div>
                 <div class="form-group">
-                    {{csrf_field()}}
                     <label>E-mail</label>
                     <input type="email" name="email" class="form-control" value="{{$apprenant->email}}" placeholder="Saisir votre e-mail">
                     @if($errors->has('email'))
@@ -31,7 +29,6 @@
                     @endif
                 </div>
                 <div class="form-group">
-                    {{csrf_field()}}
                     <label>Sexe</label>
                     <div>
                         @if($apprenant->gender === 'homme')
@@ -54,21 +51,22 @@
                     @endif
                 </div>
                 <div class="form-group">
-                    {{csrf_field()}}
                     <label>Age</label>
                     <input type="number" name="age" class="form-control" value="{{$apprenant->age}}" placeholder="Saisir votre age">
                     @if($errors->has('age'))
                         <small class="form-text text-danger">{{ $errors->first('age') }}</small>
                     @endif
                 </div>
-                @foreach($competences as $competence)
-                    <div class="form-group">
-                        {{csrf_field()}}
-                        <label>{{$competence->libelle}}</label>
-                        <input type="checkbox" name="skill" value="{{$competence->libelle}}">
+                @foreach($competences as $key=>$competence)
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="skill" value="{{$competence->id}}"
+                        @if (isset($apprenant->competences[$key]) && ($competence->id == $apprenant->competences[$key]->id))
+                            checked
+                            @endif>
+                        <label class="form-check-label">{{$competence->libelle}}</label>
                     </div>
                 @endforeach
-                <button type="submit" class="btn btn-warning">Editer</button>
+                <button type="submit" class="btn btn-warning mt-3">Editer</button>
             </form>
         </div>
     </div>

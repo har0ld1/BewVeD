@@ -50,12 +50,12 @@
                     @endif
                 </div>
                 @foreach($competences as $competence)
-                    <div class="form-group">
-                        <label>{{$competence->libelle}}</label>
-                        <input type="checkbox" name="skill" value="{{$competence->libelle}}">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="skill" value="{{$competence->id}}">
+                        <label class="form-check-label">{{$competence->libelle}}</label>
                     </div>
                 @endforeach
-                <button type="submit" class="btn btn-warning">Créer</button>
+                <button type="submit" class="btn btn-warning mt-3">Créer</button>
             </form>
         </div>
     </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Session;
 use App\Http\Controllers\Apprenant\ApprenantController;
 use App\Http\Controllers\Controller;
 use App\Models\Apprenant;
+use App\Models\Competence;
 use App\Models\SessionApprenant;
 use Illuminate\Http\Request;
 use App\Models\Session;
