@@ -8,12 +8,34 @@ use App\Models\Apprenant;
 use App\Models\Competence;
 use App\Models\MiniGroupe;
 use App\Models\SessionApprenant;
+use App\Models\MiniGroupeApprenant;
 use Illuminate\Http\Request;
 use App\Models\Session;
 use Illuminate\Support\Facades\DB;
 
 class SessionController extends Controller
 {
+    public function compoMinigroup(Array $array)
+    {
+        $rest = count($array) % 3;
+        //echo count($array) . PHP_EOL;
+        //echo "rest : " . $rest . PHP_EOL;
+        switch($rest) {
+            case 1:
+                //echo "mini-groupes de 4" . PHP_EOL;
+                return 4;
+                break;
+            default:
+                //echo "mini-groupes de 3" . PHP_EOL;
+                return 3;
+                break;
+        }
+    }
+
+    public function minigroupNoFilter(Array $array, $nbArray)
+    {
+        return (array_chunk($array, $nbArray));
+    }
 
     protected function index()
     {
@@ -45,8 +67,10 @@ class SessionController extends Controller
         $apprenant = DB::table("apprenant")
             ->join("sessionapprenant", "apprenant.id", "=", "idApprenant")
             ->where('sessionapprenant.idSession', '=', $id)
-            ->get();
-
+            ->inRandomOrder()
+            ->get()
+            ->toArray();
+        //dd($this->minigroupNoFilter($apprenant, $this->compoMinigroup($apprenant)));
         $minigroupe = MiniGroupe::where('sessionid', '=', $id)->count();
 
         return view('session.show')
@@ -89,12 +113,30 @@ class SessionController extends Controller
         return redirect()->route('session_show', $idSession);
     }
 
-    public function create_mini_groupe($id)
+    public function create_mini_groupe($idSession)
     {
         //creation mini-groupe
-        $minigroupe = new MiniGroupe();
-        $minigroupe->sessionid = $id;
-        $minigroupe->save();
-        return redirect()->route('session_show', $id);
+        $apprenant = DB::table("apprenant")
+            ->select("apprenant.id")
+            ->join("sessionapprenant", "apprenant.id", "=", "idApprenant")
+            ->where('sessionapprenant.idSession', '=', $idSession)
+            ->inRandomOrder()
+            ->get()
+            ->toArray();
+        
+        $groupes = $this->minigroupNoFilter($apprenant, $this->compoMinigroup($apprenant));
+
+        foreach($groupes as $groupe => $apprenant) {
+            $minigroupe = new MiniGroupe();
+            $minigroupe->sessionid = $idSession;
+            $minigroupe->save();
+            dd($apprenant[$groupe]);
+            $minigroupe_apprenant = new MiniGroupeApprenant;
+            $minigroupe_apprenant->idminigroupe = $minigroupe->id;
+            $minigroupe_apprenant->idapprenant = $apprenant[$groupe];
+            $minigroupe_apprenant->save();
+        }
+
+        return redirect()->route('session_show', $idSession);
     }
 }

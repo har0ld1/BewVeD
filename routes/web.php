@@ -35,7 +35,7 @@ Route::middleware([\App\Http\Middleware\Authenticate::class])->group(function ()
     Route::get('/session/apprenant/{id}', [SessionController::class, 'apprenant'])->name('apprenant_add');
     Route::get('/session/apprenant/add/{idSession}/{idApprenant}', [SessionController::class, 'add_apprenant'])->name('apprenant_add_submit');;
     Route::get('/session/apprenant/delete/{idSession}/{idApprenant}', [SessionController::class, 'remove_apprenant'])->name('apprenant_remove');
-    Route::get('/session/minigroupe/add/{id}', [SessionController::class, 'create_mini_groupe'])->name('create_mini_groupe');
+    Route::get('/session/minigroupe/add/{idSession}', [SessionController::class, 'create_mini_groupe'])->name('create_mini_groupe');
 
     Route::get('/apprenant', [ApprenantController::class, 'index'])->name('apprenant');
     Route::get('/apprenant/create', [ApprenantController::class, 'create'])->name('apprenant_create');
