@@ -46,6 +46,7 @@
                     Mini-Groupes
                 </div>
                 <div class="card-body">
+                    @if(!$minigroupe)
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
                         <label class="form-check-label" for="inlineCheckbox1">Sexe</label>
@@ -58,7 +59,8 @@
                         <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
                         <label class="form-check-label" for="inlineCheckbox1">Compétences</label>
                     </div><br>
-                    <button class="btn btn-primary" type="submit">Créer les mini-groupes</button>
+                    <a href="{{route('create_mini_groupe', $session->id)}}" class="btn btn-primary" type="submit">Créer les mini-groupes</a>
+                    @endif
                 </div>
             </div>
         </div>

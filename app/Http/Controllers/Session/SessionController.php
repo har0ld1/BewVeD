@@ -6,6 +6,7 @@ use App\Http\Controllers\Apprenant\ApprenantController;
 use App\Http\Controllers\Controller;
 use App\Models\Apprenant;
 use App\Models\Competence;
+use App\Models\MiniGroupe;
 use App\Models\SessionApprenant;
 use Illuminate\Http\Request;
 use App\Models\Session;
@@ -46,8 +47,12 @@ class SessionController extends Controller
             ->where('sessionapprenant.idSession', '=', $id)
             ->get();
 
+        $minigroupe = MiniGroupe::where('sessionid', '=', $id)->count();
+
         return view('session.show')
-            ->with(['session' => Session::findOrFail($id), 'apprenant' => $apprenant]);
+            ->with(['session' => Session::findOrFail($id), 
+            'apprenant' => $apprenant,
+            'minigroupe' => $minigroupe]);
     }
 
     public function remove($id)
@@ -82,5 +87,14 @@ class SessionController extends Controller
     {
         SessionApprenant::where("idSession", "=", 1)->where("idApprenant", "=", $idApprenant)->delete();
         return redirect()->route('session_show', $idSession);
+    }
+
+    public function create_mini_groupe($id)
+    {
+        //creation mini-groupe
+        $minigroupe = new MiniGroupe();
+        $minigroupe->sessionid = $id;
+        $minigroupe->save();
+        return redirect()->route('session_show', $id);
     }
 }

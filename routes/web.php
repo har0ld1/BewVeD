@@ -17,7 +17,7 @@ use App\Http\Controllers\Apprenant\ApprenantController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', [SessionController::class, 'index']);
+Route::get('/', [LoginController::class, 'index']);
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'authenticate']);
 
@@ -35,6 +35,7 @@ Route::middleware([\App\Http\Middleware\Authenticate::class])->group(function ()
     Route::get('/session/apprenant/{id}', [SessionController::class, 'apprenant'])->name('apprenant_add');
     Route::get('/session/apprenant/add/{idSession}/{idApprenant}', [SessionController::class, 'add_apprenant'])->name('apprenant_add_submit');;
     Route::get('/session/apprenant/delete/{idSession}/{idApprenant}', [SessionController::class, 'remove_apprenant'])->name('apprenant_remove');
+    Route::get('/session/minigroupe/add/{id}', [SessionController::class, 'create_mini_groupe'])->name('create_mini_groupe');
 
     Route::get('/apprenant', [ApprenantController::class, 'index'])->name('apprenant');
     Route::get('/apprenant/create', [ApprenantController::class, 'create'])->name('apprenant_create');
