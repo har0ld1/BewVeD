@@ -41,12 +41,13 @@
                 @endforeach
                 </tbody>
             </table>
+            @if(count($apprenant) > 0)
             <div class="card">
                 <div class="card-header">
                     Mini-Groupes
                 </div>
                 <div class="card-body">
-                    @if(!$minigroupe)
+                    @if($minigroupe == 0)
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
                         <label class="form-check-label" for="inlineCheckbox1">Sexe</label>
@@ -63,6 +64,7 @@
                     @endif
                 </div>
             </div>
+            @endif
         </div>
     </div>
 </div>
